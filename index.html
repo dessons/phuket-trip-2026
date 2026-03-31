@@ -44,7 +44,29 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;backgr
 .summary-item{text-align:center;background:rgba(255,255,255,.7);border-radius:12px;padding:12px 20px;min-width:100px}
 .summary-item .num{font-size:1.6em;font-weight:800;color:#00897b}
 .summary-item .label{font-size:.8em;color:#888;margin-top:2px}
-@media(max-width:600px){.hero h1{font-size:1.6em}.flight-info{grid-template-columns:1fr;gap:8px}.flight-arrow .line{width:40px}.day-card{padding:16px}.summary-bar{gap:12px}}
+@media(max-width:600px){
+.hero h1{font-size:1.6em}
+.flight-info{display:flex;align-items:center;gap:8px;margin:10px 0;padding:8px 0;background:rgba(0,0,0,.02);border-radius:10px;flex-wrap:nowrap}
+.airport{text-align:center;flex:1;min-width:0}
+.airport .code{font-size:1em;font-weight:800;color:#00897b}
+.airport .name{font-size:.7em;color:#888;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.airport .time{font-size:.95em;font-weight:700;color:#333;margin-top:2px}
+.flight-arrow{flex-shrink:0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;padding:0 4px}
+.flight-arrow .line{width:30px;height:2px;background:linear-gradient(90deg,#42a5f5,#26a69a);margin:0;border-radius:1px}
+.flight-no{background:#e3f2fd;color:#1565c0;border-radius:6px;padding:1px 6px;font-weight:700;font-size:.75em;white-space:nowrap}
+.day-card{padding:14px 16px;margin-bottom:12px}
+.summary-bar{gap:10px}
+.summary-item{padding:10px 14px;min-width:72px}
+.summary-item .num{font-size:1.3em}
+.tabs{gap:8px}
+.tab-btn{padding:8px 18px;font-size:.9em}
+.play-emoji{font-size:1.3em;letter-spacing:4px;padding:12px 0}
+.note{font-size:.82em;padding:8px 10px}
+.hotel-tag{font-size:.82em;padding:5px 10px}
+.leg-label{font-size:.85em}
+.leg-connector{font-size:.78em}
+.end-tag{font-size:.85em}
+}
 </style>
 </head>
 <body>
