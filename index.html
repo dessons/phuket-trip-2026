@@ -14,81 +14,349 @@
 <meta name="twitter:title" content="🌴 普吉岛之旅 · 2026年6月3日-6日">
 <meta name="twitter:description" content="阳光·沙滩·海浪 | 广州分队 & 杭州分队 | 4天3晚行程详情">
 <meta name="twitter:image" content="https://dessons.github.io/phuket-trip-2026/phuket-og.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f5;color:#333}
-.hero{text-align:center;padding:40px 20px 24px;background:linear-gradient(135deg,#00897b,#26a69a);color:#fff}
-.hero h1{font-size:2em;font-weight:800;margin-bottom:6px}
-.hero .dates{display:inline-block;background:rgba(255,255,255,.2);border-radius:20px;padding:6px 20px;font-size:.9em}
-.container{max-width:800px;margin:0 auto;padding:0 12px 40px}
-.tabs{display:flex;justify-content:center;gap:10px;margin:20px 0 16px}
-.tab-btn{padding:8px 24px;border:none;border-radius:25px;font-size:.95em;font-weight:600;cursor:pointer;transition:all .3s;background:#e0e0e0;color:#555}
-.tab-btn.active{background:#00897b;color:#fff;box-shadow:0 3px 10px rgba(0,137,123,.3)}
+:root{
+  --sunset-1:#ff6b35;--sunset-2:#f7931e;--sunset-3:#ff4e8a;--sunset-4:#9b5de5;
+  --ocean-1:#00b4d8;--ocean-2:#0077b6;--ocean-3:#023e8a;
+  --sand:#fef3e2;--coral:#ff6b6b;--palm:#2d6a4f;
+  --bg:#fafafa;--card:#fff;--text:#1d1d1f;--text-secondary:#6e6e73;
+  --radius:20px;--shadow:0 4px 24px rgba(0,0,0,0.06);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:4rem 2rem 6rem;color:#fff;overflow:hidden;
+  background:linear-gradient(135deg,#ff6b35 0%,#f7931e 25%,#ff4e8a 50%,#9b5de5 75%,#00b4d8 100%);
+  background-size:200% 200%;animation:gradientShift 12s ease infinite;
+}
+@keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 80%,rgba(255,107,53,0.3) 0%,transparent 60%),radial-gradient(ellipse at 70% 20%,rgba(155,93,229,0.3) 0%,transparent 60%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:80px;background:var(--bg);clip-path:ellipse(55% 100% at 50% 100%)}
+.hero h1{font-size:clamp(3rem,10vw,6rem);font-weight:900;letter-spacing:-0.04em;line-height:1;margin-bottom:1.5rem;position:relative;z-index:1;text-shadow:0 4px 30px rgba(0,0,0,0.15)}
+.hero .subtitle{font-size:clamp(1.125rem,2.5vw,1.5rem);font-weight:400;opacity:0.9;max-width:500px;line-height:1.5;margin-bottom:2rem;position:relative;z-index:1}
+.hero .dates{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);border-radius:980px;padding:0.75rem 2rem;font-size:1rem;font-weight:600;position:relative;z-index:1}
+.scroll-hint{position:absolute;bottom:6rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;opacity:0.7;z-index:1;animation:bounce 2s infinite}
+.scroll-hint span{font-size:0.8rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase}
+.scroll-hint::after{content:'↓';font-size:1.25rem}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* ===== STATS BAR ===== */
+.stats-bar{display:flex;justify-content:center;gap:3rem;padding:3rem 2rem;flex-wrap:wrap;max-width:800px;margin:-2rem auto 0;position:relative;z-index:2}
+.stat{text-align:center}
+.stat-value{font-size:clamp(2rem,5vw,3rem);font-weight:800;background:linear-gradient(135deg,var(--sunset-1),var(--sunset-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:0.875rem;color:var(--text-secondary);margin-top:0.25rem;font-weight:500}
+
+/* ===== TABS ===== */
+.tabs-section{max-width:900px;margin:2rem auto 0;padding:0 1.5rem}
+.tabs{display:flex;justify-content:center;gap:0.75rem;margin-bottom:2rem}
+.tab-btn{padding:0.75rem 2rem;border:2px solid #e5e5e5;border-radius:980px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;background:transparent;color:var(--text-secondary);font-family:inherit}
+.tab-btn:hover{border-color:var(--sunset-2);color:var(--sunset-1)}
+.tab-btn.active{background:linear-gradient(135deg,var(--sunset-1),var(--sunset-3));color:#fff;border-color:transparent;box-shadow:0 4px 20px rgba(255,78,138,0.3)}
 .tab-content{display:none}.tab-content.active{display:block}
-.card{background:#fff;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:4px solid #26a69a}
-.card.fo{border-left-color:#42a5f5}.card.fb{border-left-color:#ff8a65}.card.pl{border-left-color:#66bb6a}
-.ch{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.badge{background:#00897b;color:#fff;border-radius:10px;padding:4px 12px;font-weight:700;font-size:.85em}
-.ct{font-weight:700;font-size:1em}
-.route{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:nowrap}
-.ap{text-align:center;flex:1;min-width:0}
-.ap .t{font-weight:700;font-size:1.05em}.ap .c{font-weight:800;color:#00897b;font-size:1.1em}.ap .n{font-size:.75em;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.aw{flex-shrink:0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;padding:0 6px}
-.aw .ln{width:40px;height:2px;background:linear-gradient(90deg,#42a5f5,#26a69a);border-radius:1px}
-.fn{background:#e3f2fd;color:#1565c0;border-radius:6px;padding:1px 8px;font-weight:700;font-size:.75em;white-space:nowrap}
-.hotel{display:inline-flex;align-items:center;gap:4px;background:#e8f5e9;color:#2e7d32;border-radius:8px;padding:4px 12px;font-size:.82em;font-weight:600;margin-top:6px}
-.note{background:#fff3e0;border-radius:8px;padding:8px 12px;margin-top:8px;font-size:.82em;color:#e65100;line-height:1.5}
-.note::before{content:"⚠️ "}
-.ll{font-weight:600;color:#1565c0;font-size:.88em;margin-bottom:4px}
-.lc{text-align:center;color:#999;font-size:.8em;padding:2px 0}
-.is{margin-top:32px}
-.sh{text-align:center;font-size:1.4em;font-weight:800;color:#00897b;margin-bottom:16px}
-.db{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:16px;box-shadow:0 3px 12px rgba(0,0,0,.07)}
-.dh{background:linear-gradient(135deg,#00897b,#26a69a);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:10px}
-.dh .dn{font-size:1.3em;font-weight:800}.dh .dt{opacity:.85;font-size:.9em}.dh .th{margin-left:auto;font-weight:600}
-.ev{display:flex;gap:12px;padding:12px 16px;border-bottom:1px solid #f0f0f0}
-.ev:last-child{border-bottom:none}
-.et{width:55px;flex-shrink:0;text-align:center;font-weight:700;color:#00897b;font-size:.85em;padding-top:2px}
-.ei{width:100px;height:70px;border-radius:10px;overflow:hidden;flex-shrink:0;background:#eee}
-.ei img{width:100%;height:100%;object-fit:cover}
-.ed{flex:1;min-width:0}
-.ed h4{font-size:.92em;font-weight:700;margin-bottom:2px}
-.ed p{font-size:.8em;color:#777;line-height:1.4}
-.tp{display:inline-block;margin-top:4px;background:#fff3e0;color:#e65100;border-radius:6px;padding:2px 8px;font-size:.72em;font-weight:600}
-@media(max-width:600px){
-.hero h1{font-size:1.5em}
-.route{gap:6px;padding:6px 0;background:#fafafa;border-radius:8px}
-.ap .c{font-size:.95em}.ap .t{font-size:.9em}.ap .n{font-size:.65em}
-.aw .ln{width:28px}.fn{font-size:.68em;padding:1px 5px}
-.card{padding:12px}
-.ev{flex-wrap:wrap}.ei{width:100%;height:120px}.et{width:45px;font-size:.78em}
-.dh .th{display:none}
+
+/* ===== FLIGHT CARDS ===== */
+.flight-card{background:var(--card);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04);transition:all 0.4s ease;position:relative;overflow:hidden}
+.flight-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.1)}
+.flight-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.flight-card.fly-out::before{background:linear-gradient(90deg,var(--ocean-1),var(--ocean-2))}
+.flight-card.fly-back::before{background:linear-gradient(90deg,var(--sunset-3),var(--sunset-1))}
+.flight-card.play::before{background:linear-gradient(90deg,var(--palm),#52b788)}
+.flight-card.transfer::before{background:linear-gradient(90deg,var(--sunset-2),var(--coral))}
+.card-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem}
+.date-badge{background:linear-gradient(135deg,var(--sunset-1),var(--sunset-3));color:#fff;border-radius:12px;padding:0.4rem 1rem;font-weight:700;font-size:0.85rem}
+.card-title{font-size:1.125rem;font-weight:700}
+.route{display:flex;align-items:center;gap:1rem;margin:1rem 0}
+.airport{text-align:center;flex:1;min-width:0}
+.airport .time{font-size:1.5rem;font-weight:800;color:var(--text)}
+.airport .code{font-size:1.25rem;font-weight:800;color:var(--ocean-2);margin:0.25rem 0}
+.airport .name{font-size:0.75rem;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.airway{flex-shrink:0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:0 0.5rem}
+.airway .flight-no{background:#e3f2fd;color:#1565c0;border-radius:8px;padding:0.25rem 0.75rem;font-weight:700;font-size:0.75rem;white-space:nowrap}
+.airway .line{width:60px;height:2px;background:linear-gradient(90deg,var(--ocean-1),var(--ocean-2));border-radius:1px;position:relative}
+.airway .line::before{content:'✈';position:absolute;right:-4px;top:-8px;font-size:0.9rem}
+.airway .duration{font-size:0.7rem;color:var(--text-secondary);font-weight:500}
+.hotel-badge{display:inline-flex;align-items:center;gap:0.4rem;background:#e8f5e9;color:#2e7d32;border-radius:12px;padding:0.5rem 1rem;font-size:0.85rem;font-weight:600;margin-top:1rem}
+.transfer-note{background:#fff3e0;border-radius:12px;padding:0.75rem 1rem;margin:0.75rem 0;font-size:0.85rem;color:#e65100;line-height:1.5;display:flex;align-items:flex-start;gap:0.5rem}
+.transfer-note::before{content:'⚠️';flex-shrink:0}
+.leg-label{font-weight:600;color:var(--ocean-2);font-size:0.85rem;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.4rem}
+.leg-label::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ocean-1)}
+.layover{text-align:center;color:var(--text-secondary);font-size:0.8rem;padding:0.5rem 0;font-weight:500}
+
+/* ===== DAY CARDS ===== */
+.day-card{background:var(--card);border-radius:var(--radius);overflow:hidden;margin-bottom:1.5rem;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04);transition:all 0.4s ease}
+.day-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.1)}
+.day-header{padding:1.5rem 1.5rem 1rem;display:flex;align-items:center;gap:1rem}
+.day-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.day-icon.beach{background:linear-gradient(135deg,#ff6b35,#f7931e)}
+.day-icon.adventure{background:linear-gradient(135deg,#00b4d8,#0077b6)}
+.day-icon.relax{background:linear-gradient(135deg,#9b5de5,#d4a5ff)}
+.day-header .day-title{font-size:1.125rem;font-weight:700}
+.day-header .day-date{font-size:0.8rem;color:var(--text-secondary);font-weight:500}
+.day-events{padding:0 1.5rem 1.5rem}
+.day-event{display:flex;gap:1rem;padding:0.75rem 0;border-bottom:1px solid #f0f0f0}
+.day-event:last-child{border-bottom:none}
+.event-time{width:50px;flex-shrink:0;text-align:center;font-weight:700;color:var(--ocean-2);font-size:0.8rem;padding-top:0.25rem}
+.event-emoji{width:48px;height:48px;border-radius:12px;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.event-info{flex:1;min-width:0}
+.event-info h4{font-size:0.9rem;font-weight:600;margin-bottom:0.125rem}
+.event-info p{font-size:0.8rem;color:var(--text-secondary);line-height:1.4}
+.event-tag{display:inline-block;margin-top:0.25rem;background:#e3f2fd;color:#1565c0;border-radius:6px;padding:0.125rem 0.5rem;font-size:0.7rem;font-weight:600}
+
+/* ===== SECTION TITLE ===== */
+.section-title{text-align:center;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;margin:3rem 0 0.5rem;letter-spacing:-0.02em}
+.section-subtitle{text-align:center;color:var(--text-secondary);font-size:1rem;margin-bottom:2rem}
+
+/* ===== FOOTER ===== */
+.footer{text-align:center;padding:3rem 2rem;color:var(--text-secondary);font-size:0.8rem}
+.footer .heart{color:var(--coral)}
+
+/* ===== ANIMATIONS ===== */
+.fade-in{opacity:0;transform:translateY(30px);transition:all 0.8s cubic-bezier(0.16,1,0.3,1)}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .hero{min-height:90vh;padding:3rem 1.5rem 5rem}
+  .hero h1{font-size:clamp(2.5rem,12vw,4rem)}
+  .stats-bar{gap:1.5rem;padding:2rem 1rem}
+  .stat-value{font-size:2rem}
+  .tabs{gap:0.5rem}
+  .tab-btn{padding:0.6rem 1.25rem;font-size:0.85rem}
+  .flight-card,.day-card{padding:1.25rem;margin:0 -0.5rem 1rem;border-radius:16px}
+  .route{gap:0.5rem;flex-wrap:wrap}
+  .airport .time{font-size:1.25rem}
+  .airport .code{font-size:1rem}
+  .airport .name{font-size:0.65rem}
+  .airway .line{width:40px}
+  .day-event{gap:0.75rem}
+  .event-emoji{width:40px;height:40px;font-size:1.25rem}
+  .section-title{font-size:1.75rem}
 }
 </style>
 </head>
 <body>
-<div class="hero"><h1>🌴 普吉岛之旅 🏖️</h1><div class="dates">📅 2026.6.3 — 6.6（4天3晚）</div></div>
-<div class="container">
-<div class="tabs"><button class="tab-btn active" onclick="switchTab('gz')">🏙 广州分队</button><button class="tab-btn" onclick="switchTab('hz')">🌊 杭州分队</button></div>
-<div id="tab-gz" class="tab-content active">
-<div class="card fo"><div class="ch"><span class="badge">6月3日</span><span class="ct">✈️ 直飞普吉岛</span></div><div class="route"><div class="ap"><div class="t">12:55</div><div class="c">CAN</div><div class="n">广州白云 T2</div></div><div class="aw"><span class="fn">CZ6063</span><span class="ln"></span>直飞</div><div class="ap"><div class="t">15:40</div><div class="c">HKT</div><div class="n">普吉岛</div></div></div><div class="hotel">🏨 普吉岛酒店 · 第1晚</div></div>
-<div class="card pl"><div class="ch"><span class="badge">6月4日</span><span class="ct">🌴 普吉岛游玩</span></div><p style="text-align:center;font-size:1.4em;padding:16px 0;letter-spacing:6px">🌴 🏖️ ☀️ 🌊 🐚</p><div class="hotel">🏨 普吉岛酒店 · 第2晚</div></div>
-<div class="card pl"><div class="ch"><span class="badge">6月5日</span><span class="ct">🌴 普吉岛游玩</span></div><p style="text-align:center;font-size:1.4em;padding:16px 0;letter-spacing:6px">🏄‍♂️ 🤿 🚤 🥥 🌅</p><div class="hotel">🏨 普吉岛酒店 · 第3晚</div></div>
-<div class="card fb"><div class="ch"><span class="badge">6月6日</span><span class="ct">✈️ 返程广州</span></div><div class="route"><div class="ap"><div class="t">16:40</div><div class="c">HKT</div><div class="n">普吉岛</div></div><div class="aw"><span class="fn">CZ6064</span><span class="ln"></span>直飞</div><div class="ap"><div class="t">21:40</div><div class="c">CAN</div><div class="n">广州白云 T2</div></div></div><p style="text-align:center;color:#999;font-size:.88em;margin-top:6px">🏁 平安到家～</p></div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>🌴 普吉岛之旅</h1>
+  <p class="subtitle">阳光 · 沙滩 · 海浪 · 和你一起的夏天</p>
+  <div class="dates">📅 2026.6.3 — 6.6 · 4天3晚</div>
+  <div class="scroll-hint"><span>探索行程</span></div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar fade-in">
+  <div class="stat"><div class="value">4</div><div class="label">天精彩旅程</div></div>
+  <div class="stat"><div class="value">3</div><div class="label">晚海岛酒店</div></div>
+  <div class="stat"><div class="value">2</div><div class="label">支小分队</div></div>
+  <div class="stat"><div class="value">∞</div><div class="label">美好回忆</div></div>
 </div>
-<div id="tab-hz" class="tab-content">
-<div class="card fo"><div class="ch"><span class="badge">6月3日</span><span class="ct">✈️ 广州中转</span></div><div class="ll">第一程</div><div class="route"><div class="ap"><div class="t">08:35</div><div class="c">HGH</div><div class="n">杭州萧山 T4</div></div><div class="aw"><span class="fn">CZ3820</span><span class="ln"></span></div><div class="ap"><div class="t">10:50</div><div class="c">CAN</div><div class="n">广州白云 T2</div></div></div><div class="lc">↓ 停留约2小时 · 行李直达 ↓</div><div class="ll" style="margin-top:6px">第二程</div><div class="route"><div class="ap"><div class="t">12:55</div><div class="c">CAN</div><div class="n">广州白云 T2</div></div><div class="aw"><span class="fn">CZ6063</span><span class="ln"></span></div><div class="ap"><div class="t">15:40</div><div class="c">HKT</div><div class="n">普吉岛</div></div></div><div class="note">行李已直挂普吉岛，无需重新托运</div><div class="hotel">🏨 普吉岛酒店 · 第1晚</div></div>
-<div class="card pl"><div class="ch"><span class="badge">6月4日</span><span class="ct">🌴 普吉岛游玩</span></div><p style="text-align:center;font-size:1.4em;padding:16px 0;letter-spacing:6px">🌴 🏖️ ☀️ 🌊 🐚</p><div class="hotel">🏨 普吉岛酒店 · 第2晚</div></div>
-<div class="card pl"><div class="ch"><span class="badge">6月5日</span><span class="ct">🌴 普吉岛游玩</span></div><p style="text-align:center;font-size:1.4em;padding:16px 0;letter-spacing:6px">🏄‍♂️ 🤿 🚤 🥥 🌅</p><div class="hotel">🏨 普吉岛酒店 · 第3晚</div></div>
-<div class="card fb"><div class="ch"><span class="badge">6月6日</span><span class="ct">✈️ 曼谷中转回杭</span></div><div class="ll">第一程</div><div class="route"><div class="ap"><div class="t">15:10</div><div class="c">HKT</div><div class="n">普吉岛</div></div><div class="aw"><span class="fn">FD3092</span><span class="ln"></span></div><div class="ap"><div class="t">16:17</div><div class="c">DMK</div><div class="n">曼谷廊曼 T2</div></div></div><div class="lc">↓ 停留约2.5小时 ↓</div><div class="note">需换航站楼 + 重新办理登机 + 重新托运行李！</div><div class="ll" style="margin-top:6px">第二程</div><div class="route"><div class="ap"><div class="t">19:05</div><div class="c">DMK</div><div class="n">曼谷廊曼 T1</div></div><div class="aw"><span class="fn">SL920</span><span class="ln"></span></div><div class="ap"><div class="t">23:39</div><div class="c">HGH</div><div class="n">杭州萧山 T4</div></div></div><p style="text-align:center;color:#999;font-size:.88em;margin-top:6px">🏁 深夜抵达杭州，辛苦啦～</p></div>
+
+<!-- TABS -->
+<div class="tabs-section">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('gz')">🏙 广州分队</button>
+    <button class="tab-btn" onclick="switchTab('hz')">🌊 杭州分队</button>
+  </div>
+
+  <!-- 广州分队 -->
+  <div id="tab-gz" class="tab-content active">
+    
+    <h2 class="section-title fade-in">✈️ 航班信息</h2>
+    <p class="section-subtitle fade-in">广州白云直飞，轻松出发</p>
+
+    <!-- 6月3日 去程 -->
+    <div class="flight-card fly-out fade-in">
+      <div class="card-header">
+        <span class="date-badge">6月3日</span>
+        <span class="card-title">✈️ 直飞普吉岛</span>
+      </div>
+      <div class="route">
+        <div class="airport"><div class="time">12:55</div><div class="code">CAN</div><div class="name">广州白云 T2</div></div>
+        <div class="airway"><span class="flight-no">CZ6063</span><span class="line"></span><span class="duration">约3h45m</span></div>
+        <div class="airport"><div class="time">15:40</div><div class="code">HKT</div><div class="name">普吉岛</div></div>
+      </div>
+      <div class="hotel-badge">🏨 普吉岛酒店 · 第1晚</div>
+    </div>
+
+    <!-- 6月6日 返程 -->
+    <div class="flight-card fly-back fade-in">
+      <div class="card-header">
+        <span class="date-badge">6月6日</span>
+        <span class="card-title">✈️ 返程广州</span>
+      </div>
+      <div class="route">
+        <div class="airport"><div class="time">16:40</div><div class="code">HKT</div><div class="name">普吉岛</div></div>
+        <div class="airway"><span class="flight-no">CZ6064</span><span class="line"></span><span class="duration">约5h</span></div>
+        <div class="airport"><div class="time">21:40</div><div class="code">CAN</div><div class="name">广州白云 T2</div></div>
+      </div>
+      <p style="text-align:center;color:var(--text-secondary);font-size:0.88em;margin-top:0.75rem">🏁 平安到家～</p>
+    </div>
+
+    <h2 class="section-title fade-in" style="margin-top:3rem">🏖️ 每日行程</h2>
+    <p class="section-subtitle fade-in">阳光沙滩，尽情享受</p>
+
+    <!-- 6月4日 -->
+    <div class="day-card fade-in">
+      <div class="day-header">
+        <div class="day-icon beach">🏖️</div>
+        <div><div class="day-title">普吉岛探索</div><div class="day-date">6月4日 · 第2天</div></div>
+      </div>
+      <div class="day-events">
+        <div class="day-event">
+          <div class="event-time">上午</div>
+          <div class="event-emoji">🌴</div>
+          <div class="event-info"><h4>热带雨林漫步</h4><p>感受热带植物的独特魅力</p><span class="event-tag">自然</span></div>
+        </div>
+        <div class="day-event">
+          <div class="event-time">下午</div>
+          <div class="event-emoji">🏖️</div>
+          <div class="event-info"><h4>海滩时光</h4><p>阳光、沙滩、海浪，尽情享受</p><span class="event-tag">休闲</span></div>
+        </div>
+        <div class="day-event">
+          <div class="event-time">晚上</div>
+          <div class="event-emoji">🌅</div>
+          <div class="event-info"><h4>日落晚餐</h4><p>海边餐厅，看夕阳西下</p><span class="event-tag">美食</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.5rem 1.25rem"><div class="hotel-badge">🏨 普吉岛酒店 · 第2晚</div></div>
+    </div>
+
+    <!-- 6月5日 -->
+    <div class="day-card fade-in">
+      <div class="day-header">
+        <div class="day-icon adventure">🤿</div>
+        <div><div class="day-title">海上冒险日</div><div class="day-date">6月5日 · 第3天</div></div>
+      </div>
+      <div class="day-events">
+        <div class="day-event">
+          <div class="event-time">上午</div>
+          <div class="event-emoji">🏄</div>
+          <div class="event-info"><h4>冲浪体验</h4><p>乘风破浪，挑战自我</p><span class="event-tag">运动</span></div>
+        </div>
+        <div class="day-event">
+          <div class="event-time">下午</div>
+          <div class="event-emoji">🤿</div>
+          <div class="event-info"><h4>浮潜探险</h4><p>探索海底世界的缤纷色彩</p><span class="event-tag">探险</span></div>
+        </div>
+        <div class="day-event">
+          <div class="event-time">晚上</div>
+          <div class="event-emoji">🥥</div>
+          <div class="event-info"><h4>夜市漫步</h4><p>品尝地道泰式美食</p><span class="event-tag">美食</span></div>
+        </div>
+      </div>
+      <div style="padding:0 1.5rem 1.25rem"><div class="hotel-badge">🏨 普吉岛酒店 · 第3晚</div></div>
+    </div>
+
+  </div>
+
+  <!-- 杭州分队 -->
+  <div id="tab-hz" class="tab-content">
+    
+    <h2 class="section-title fade-in">✈️ 航班信息</h2>
+    <p class="section-subtitle fade-in">杭州出发，经广州中转</p>
+
+    <!-- 6月3日 去程 -->
+    <div class="flight-card transfer fade-in">
+      <div class="card-header">
+        <span class="date-badge">6月3日</span>
+        <span class="card-title">✈️ 经广州中转</span>
+      </div>
+      <div class="leg-label">第一程</div>
+      <div class="route">
+        <div class="airport"><div class="time">08:35</div><div class="code">HGH</div><div class="name">杭州萧山 T4</div></div>
+        <div class="airway"><span class="flight-no">CZ3820</span><span class="line"></span><span class="duration">约2h15m</span></div>
+        <div class="airport"><div class="time">10:50</div><div class="code">CAN</div><div class="name">广州白云 T2</div></div>
+      </div>
+      <div class="layover">↓ 停留约2小时 · 行李直挂普吉岛 ↓</div>
+      <div class="leg-label">第二程</div>
+      <div class="route">
+        <div class="airport"><div class="time">12:55</div><div class="code">CAN</div><div class="name">广州白云 T2</div></div>
+        <div class="airway"><span class="flight-no">CZ6063</span><span class="line"></span><span class="duration">约3h45m</span></div>
+        <div class="airport"><div class="time">15:40</div><div class="code">HKT</div><div class="name">普吉岛</div></div>
+      </div>
+      <div class="transfer-note">行李已直挂普吉岛，无需重新托运</div>
+      <div class="hotel-badge">🏨 普吉岛酒店 · 第1晚</div>
+    </div>
+
+    <!-- 6月6日 返程 -->
+    <div class="flight-card transfer fade-in">
+      <div class="card-header">
+        <span class="date-badge">6月6日</span>
+        <span class="card-title">✈️ 经曼谷中转回杭</span>
+      </div>
+      <div class="leg-label">第一程</div>
+      <div class="route">
+        <div class="airport"><div class="time">15:10</div><div class="code">HKT</div><div class="name">普吉岛</div></div>
+        <div class="airway"><span class="flight-no">FD3092</span><span class="line"></span><span class="duration">约1h7m</span></div>
+        <div class="airport"><div class="time">16:17</div><div class="code">DMK</div><div class="name">曼谷廊曼 T2</div></div>
+      </div>
+      <div class="layover">↓ 停留约2.5小时 ↓</div>
+      <div class="transfer-note">需换航站楼 + 重新办理登机 + 重新托运行李！</div>
+      <div class="leg-label">第二程</div>
+      <div class="route">
+        <div class="airport"><div class="time">19:05</div><div class="code">DMK</div><div class="name">曼谷廊曼 T1</div></div>
+        <div class="airway"><span class="flight-no">SL920</span><span class="line"></span><span class="duration">约4h34m</span></div>
+        <div class="airport"><div class="time">23:39</div><div class="code">HGH</div><div class="name">杭州萧山 T4</div></div>
+      </div>
+      <p style="text-align:center;color:var(--text-secondary);font-size:0.88em;margin-top:0.75rem">🏁 深夜抵达杭州，辛苦啦～</p>
+    </div>
+
+    <!-- 杭州分队的行程和广州一样 -->
+    <h2 class="section-title fade-in" style="margin-top:3rem">🏖️ 每日行程</h2>
+    <p class="section-subtitle fade-in">阳光沙滩，尽情享受</p>
+
+    <div class="day-card fade-in">
+      <div class="day-header">
+        <div class="day-icon beach">🏖️</div>
+        <div><div class="day-title">普吉岛探索</div><div class="day-date">6月4日 · 第2天</div></div>
+      </div>
+      <div class="day-events">
+        <div class="day-event"><div class="event-time">上午</div><div class="event-emoji">🌴</div><div class="event-info"><h4>热带雨林漫步</h4><p>感受热带植物的独特魅力</p><span class="event-tag">自然</span></div></div>
+        <div class="day-event"><div class="event-time">下午</div><div class="event-emoji">🏖️</div><div class="event-info"><h4>海滩时光</h4><p>阳光、沙滩、海浪，尽情享受</p><span class="event-tag">休闲</span></div></div>
+        <div class="day-event"><div class="event-time">晚上</div><div class="event-emoji">🌅</div><div class="event-info"><h4>日落晚餐</h4><p>海边餐厅，看夕阳西下</p><span class="event-tag">美食</span></div></div>
+      </div>
+      <div style="padding:0 1.5rem 1.25rem"><div class="hotel-badge">🏨 普吉岛酒店 · 第2晚</div></div>
+    </div>
+
+    <div class="day-card fade-in">
+      <div class="day-header">
+        <div class="day-icon adventure">🤿</div>
+        <div><div class="day-title">海上冒险日</div><div class="day-date">6月5日 · 第3天</div></div>
+      </div>
+      <div class="day-events">
+        <div class="day-event"><div class="event-time">上午</div><div class="event-emoji">🏄</div><div class="event-info"><h4>冲浪体验</h4><p>乘风破浪，挑战自我</p><span class="event-tag">运动</span></div></div>
+        <div class="day-event"><div class="event-time">下午</div><div class="event-emoji">🤿</div><div class="event-info"><h4>浮潜探险</h4><p>探索海底世界的缤纷色彩</p><span class="event-tag">探险</span></div></div>
+        <div class="day-event"><div class="event-time">晚上</div><div class="event-emoji">🥥</div><div class="event-info"><h4>夜市漫步</h4><p>品尝地道泰式美食</p><span class="event-tag">美食</span></div></div>
+      </div>
+      <div style="padding:0 1.5rem 1.25rem"><div class="hotel-badge">🏨 普吉岛酒店 · 第3晚</div></div>
+    </div>
+
+  </div>
 </div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>Made with <span class="heart">♥</span> for our Phuket trip · 2026</p>
 </div>
+
 <script>
 function switchTab(id){
-document.querySelectorAll(".tab-content").forEach(t=>t.classList.remove("active"));
-document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
-document.getElementById("tab-"+id).classList.add("active");
-event.target.classList.add("active");
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.target.classList.add('active');
 }
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')});
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
 </script>
-</body></html>
+</body>
+</html>
